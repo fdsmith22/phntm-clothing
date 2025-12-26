@@ -16,7 +16,7 @@ export default function TVStatic({
 }: TVStaticProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isVisible, setIsVisible] = useState(true);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
   const frameCount = useRef(0);
 
   const intensityValues = {
