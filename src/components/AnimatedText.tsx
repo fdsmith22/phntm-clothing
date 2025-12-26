@@ -64,24 +64,20 @@ export default function AnimatedText({
     );
   }
 
-  const variants: Record<string, { initial: object; animate: object }> = {
-    fadeUp: {
-      initial: { opacity: 0, y: 30 },
-      animate: { opacity: 1, y: 0 },
-    },
-    fadeIn: {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-    },
-  };
+  // Default fadeUp animation
+  const initialProps = animation === "fadeIn"
+    ? { opacity: 0 }
+    : { opacity: 0, y: 30 };
 
-  const selectedVariant = variants[animation] || variants.fadeUp;
+  const animateProps = animation === "fadeIn"
+    ? { opacity: 1 }
+    : { opacity: 1, y: 0 };
 
   return (
     <Component
       className={className}
-      initial={selectedVariant.initial}
-      animate={selectedVariant.animate}
+      initial={initialProps}
+      animate={animateProps}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
     >
       {children}
