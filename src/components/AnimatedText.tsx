@@ -64,7 +64,7 @@ export default function AnimatedText({
     );
   }
 
-  const variants = {
+  const variants: Record<string, { initial: object; animate: object }> = {
     fadeUp: {
       initial: { opacity: 0, y: 30 },
       animate: { opacity: 1, y: 0 },
@@ -75,11 +75,13 @@ export default function AnimatedText({
     },
   };
 
+  const selectedVariant = variants[animation] || variants.fadeUp;
+
   return (
     <Component
       className={className}
-      initial={variants[animation]?.initial || variants.fadeUp.initial}
-      animate={variants[animation]?.animate || variants.fadeUp.animate}
+      initial={selectedVariant.initial}
+      animate={selectedVariant.animate}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
     >
       {children}
