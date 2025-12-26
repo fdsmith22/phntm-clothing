@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --ghost-glow: rgba(255, 255, 255, 0.1);
+  --ghost-glow-strong: rgba(255, 255, 255, 0.2);
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  transition: box-shadow 0.3s ease;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Typography hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Display text (large hero titles) */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+}
+
+/* Ghost glow effect on interactive elements */
+a:hover,
+button:hover {
+  text-shadow: 0 0 15px var(--ghost-glow-strong);
+}
+
+/* Custom scrollbar with ghost theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  box-shadow: 0 0 10px var(--ghost-glow);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+@layer base {
+  /* Refined typography scale */
+  h1 {
+    @apply text-5xl md:text-7xl font-bold tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold tracking-tight;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-semibold;
+  }
+
+  h4 {
+    @apply text-lg font-semibold;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  /* Small/label text */
+  .text-label {
+    @apply text-xs uppercase tracking-widest font-medium;
+    font-family: var(--font-body);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* 3D Card flip utilities */
+  .perspective-500 {
+    perspective: 500px;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* Ghost text shadow utilities */
+  .ghost-text {
+    text-shadow: 0 0 20px var(--ghost-glow);
+  }
+
+  .ghost-text-strong {
+    text-shadow: 0 0 30px var(--ghost-glow-strong);
+  }
+
+  /* Ghost glow box utilities */
+  .ghost-glow {
+    box-shadow: 0 0 20px var(--ghost-glow);
+  }
+
+  .ghost-glow-hover:hover {
+    box-shadow: 0 0 30px var(--ghost-glow-strong);
+  }
+
+  /* Ghost border utilities */
+  .ghost-border {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .ghost-border-hover:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 15px var(--ghost-glow);
+  }
+
+  /* Fade blur animation */
+  .animate-ghost-fade {
+    animation: ghostFade 3s ease-in-out infinite;
+  }
+
+  .animate-ghost-pulse {
+    animation: ghostPulse 2s ease-in-out infinite;
+  }
+
+  .animate-ghost-float {
+    animation: ghostFloat 4s ease-in-out infinite;
+  }
+}
+
+@keyframes ghostFade {
+  0%, 100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.7;
+    filter: blur(1px);
+  }
+}
+
+@keyframes ghostPulse {
+  0%, 100% {
+    box-shadow: 0 0 0px rgba(255, 255, 255, 0);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+  }
+}
+
+@keyframes ghostFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Smooth page transitions */
+.page-transition-enter {
+  opacity: 0;
+  filter: blur(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  filter: blur(0px);
+  transition: opacity 0.4s, filter 0.4s;
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  filter: blur(5px);
+  transition: opacity 0.3s, filter 0.3s;
+}
