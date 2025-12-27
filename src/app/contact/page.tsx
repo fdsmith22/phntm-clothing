@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import GhostParticles from "@/components/GhostParticles";
 
 const contactInfo = [
   { label: "Email", value: "hello@phntm.co", href: "mailto:hello@phntm.co", id: "CH-01" },
@@ -40,29 +41,29 @@ export default function ContactPage() {
     return () => clearInterval(interval);
   }, []);
 
-  // Background logo flicker effect
+  // Background logo flicker effect - subtle
   const flickerTick = useCallback(() => {
     const rand = Math.random();
-    if (rand < 0.1) {
-      setBgBrightness(0.6 + Math.random() * 0.2);
-      setTimeout(() => setBgBrightness(1), 50 + Math.random() * 100);
-    } else if (rand < 0.3) {
-      setBgBrightness(1.3 + Math.random() * 0.4);
-      setTimeout(() => setBgBrightness(1), 40 + Math.random() * 80);
+    if (rand < 0.03) {
+      setBgBrightness(0.7 + Math.random() * 0.2);
+      setTimeout(() => setBgBrightness(1), 100 + Math.random() * 150);
+    } else if (rand < 0.08) {
+      setBgBrightness(1.2 + Math.random() * 0.3);
+      setTimeout(() => setBgBrightness(1), 80 + Math.random() * 120);
     }
-    if (Math.random() < 0.05) {
-      setBgOffsetX(Math.random() * 6 - 3);
-      setTimeout(() => setBgOffsetX(0), 50);
+    if (Math.random() < 0.02) {
+      setBgOffsetX(Math.random() * 4 - 2);
+      setTimeout(() => setBgOffsetX(0), 80);
     }
-    if (Math.random() < 0.1) {
-      setGhostPhase(0.7 + Math.random() * 0.3);
-      setTimeout(() => setGhostPhase(1), 100);
+    if (Math.random() < 0.04) {
+      setGhostPhase(0.8 + Math.random() * 0.2);
+      setTimeout(() => setGhostPhase(1), 150);
     }
   }, []);
 
   useEffect(() => {
     const scheduleNext = () => {
-      const delay = 80 + Math.random() * 200;
+      const delay = 300 + Math.random() * 500;
       return setTimeout(() => {
         flickerTick();
         scheduleNext();
@@ -95,7 +96,20 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Global ghost particles */}
+      <GhostParticles count={20} />
+
+      {/* Global scan line */}
+      <motion.div
+        className="fixed left-0 right-0 h-[1px] pointer-events-none z-50"
+        style={{
+          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)",
+        }}
+        animate={{ top: ["0%", "100%"] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+      />
+
       <Navbar />
 
       {/* Hero Section */}

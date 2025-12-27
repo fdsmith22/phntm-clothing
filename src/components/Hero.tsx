@@ -39,7 +39,7 @@ export default function Hero() {
   }, [bgControls]);
 
   return (
-    <section className="relative text-center py-32 bg-gradient-to-b from-neutral-950 to-black overflow-hidden">
+    <section className="relative text-center min-h-[calc(100vh-80px)] flex flex-col items-center justify-center bg-gradient-to-b from-neutral-950 to-black overflow-hidden">
       {/* Ghost particles background */}
       <GhostParticles count={30} />
 
@@ -108,7 +108,7 @@ export default function Hero() {
           {titleLetters.map((letter, index) => (
             <motion.span
               key={index}
-              initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
+              initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
               animate={{
                 opacity: 1,
                 y: 0,
@@ -117,11 +117,11 @@ export default function Hero() {
                 skewX: glitchIndex === index ? [0, 5, -3, 0] : 0,
               }}
               transition={{
-                opacity: { duration: 0.5, delay: index * 0.04 },
-                y: { duration: 0.5, delay: index * 0.04 },
-                filter: { duration: 0.5, delay: index * 0.04 },
-                x: { duration: 0.1 },
-                skewX: { duration: 0.1 },
+                opacity: { duration: 1.2, delay: 0.3 + index * 0.08 },
+                y: { duration: 1.2, delay: 0.3 + index * 0.08 },
+                filter: { duration: 1.4, delay: 0.3 + index * 0.08 },
+                x: { duration: 0.15 },
+                skewX: { duration: 0.15 },
               }}
               className="inline-block relative"
               style={{
@@ -138,11 +138,12 @@ export default function Hero() {
           {/* RGB split ghost layer */}
           <motion.div
             className="absolute inset-0 pointer-events-none"
+            initial={{ opacity: 0 }}
             animate={{
               opacity: [0, 0.15, 0],
               x: [0, 2, 0],
             }}
-            transition={{ duration: 6, repeat: Infinity }}
+            transition={{ duration: 6, repeat: Infinity, delay: 1 }}
             style={{ color: "#ff0000", mixBlendMode: "screen" }}
           >
             {titleLetters.map((letter, index) => (
@@ -157,7 +158,7 @@ export default function Hero() {
           </motion.div>
         </motion.h1>
 
-        <GhostEffect delay={0.8} fadeIntensity="medium">
+        <GhostEffect delay={1.8} fadeIntensity="medium">
           <motion.p
             className="font-body text-neutral-400 text-lg md:text-xl font-light max-w-xl mx-auto tracking-wide"
             animate={{
@@ -177,8 +178,8 @@ export default function Hero() {
             opacity: [1, 0.7, 1, 0.9, 1],
           }}
           transition={{
-            width: { delay: 1.2, duration: 0.8 },
-            opacity: { delay: 2, duration: 3, repeat: Infinity },
+            width: { delay: 2.5, duration: 1 },
+            opacity: { delay: 3.5, duration: 3, repeat: Infinity },
           }}
           className="h-px bg-gradient-to-r from-transparent via-white to-transparent mx-auto mt-10"
         />
